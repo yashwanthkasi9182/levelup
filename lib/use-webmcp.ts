@@ -36,7 +36,14 @@ export function useWebMCP(userId: string | undefined, goals: Goal[], openGoal: (
               title: g.title,
               action: g.action,
               smallerAction: g.small_action,
-              days: g.days,
+              target: g.current_period
+                ? {
+                    measure: g.current_period.measure,
+                    period: g.current_period.period,
+                    amount: g.current_period.target,
+                    unit: g.current_period.unit,
+                  }
+                : null,
             }));
         },
       },
