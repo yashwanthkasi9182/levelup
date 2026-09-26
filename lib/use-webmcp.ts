@@ -1,4 +1,5 @@
 'use client';
+import { MAX_ACTIVE_GOALS } from '@/lib/limits';
 import { useEffect, useRef } from 'react';
 import type { Goal } from './model';
 type Tool = {
@@ -55,8 +56,8 @@ export function useWebMCP(userId: string | undefined, goals: Goal[], openGoal: (
         annotations: { readOnlyHint: false, untrustedContentHint: false },
         execute(input) {
           validateEmpty(input);
-          if (state.current.goals.filter((g) => g.user_id === userId && !g.archived).length >= 3)
-            throw new Error('Three active goals already exist.');
+          if (state.current.goals.filter((g) => g.user_id === userId && !g.archived).length >= MAX_ACTIVE_GOALS)
+            throw new Error(`You already have ${MAX_ACTIVE_GOALS} active goals.`);
           state.current.openGoal();
           return { status: 'form_opened', saved: false };
         },

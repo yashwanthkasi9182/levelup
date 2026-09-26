@@ -1,4 +1,5 @@
 'use client';
+import { MAX_ACTIVE_GOALS } from '@/lib/limits';
 import { Plus, Pencil, Archive, Users, Lock } from 'lucide-react';
 import { GoalProgress, Streaks, categoryIcons } from './shared';
 import { formatDay, targetLabel, type Goal } from '@/lib/model';
@@ -18,10 +19,10 @@ export function GoalsScreen({
     <section className="screen">
       <div className="v2-heading">
         <div>
-          <p className="eyebrow">{active.length} OF 3 ACTIVE</p>
+          <p className="eyebrow">{active.length} OF {MAX_ACTIVE_GOALS} ACTIVE</p>
           <h1>Goals</h1>
         </div>
-        <button className="button primary compact" disabled={active.length >= 3} onClick={onCreate}>
+        <button className="button primary compact" disabled={active.length >= MAX_ACTIVE_GOALS} onClick={onCreate}>
           <Plus size={18} />
           New goal
         </button>
@@ -78,7 +79,7 @@ export function GoalsScreen({
             </article>
           );
         })}
-        {active.length < 3 && (
+        {active.length < MAX_ACTIVE_GOALS && (
           <button className="add-goal-card" onClick={onCreate}>
             <span>
               <Plus size={25} />
@@ -97,7 +98,7 @@ export function GoalsScreen({
                 <span>{g.title}</span>
                 <button
                   className="text-button"
-                  disabled={active.length >= 3}
+                  disabled={active.length >= MAX_ACTIVE_GOALS}
                   onClick={() => onArchive(g, false)}
                 >
                   Start new run

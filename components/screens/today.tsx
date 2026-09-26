@@ -1,4 +1,5 @@
 'use client';
+import { MAX_ACTIVE_GOALS } from '@/lib/limits';
 import { useState } from 'react';
 import { Plus, Check } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -92,7 +93,7 @@ export function TodayScreen({
         <button
           className="icon-button outlined"
           aria-label="Create goal"
-          disabled={active.length >= 3}
+          disabled={active.length >= MAX_ACTIVE_GOALS}
           onClick={onCreate}
         >
           <Plus size={20} />

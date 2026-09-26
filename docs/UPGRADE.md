@@ -6,7 +6,7 @@ This release adds email/password auth, one-time player setup, flexible weekly/mo
 
 1. In Supabase Authentication, temporarily disable **Allow new users to sign up**. Avoid app writes during migration/reset. Export any data you want to retain.
 2. If starting fresh, run the optional reset below. Otherwise retain all accounts and history. Existing passwordless accounts can use **Forgot password** to set a password after this deployment.
-3. Run `supabase/migrations/002_flexible_goals.sql` in the SQL Editor of your existing project. **Do not rerun migration 001.** The new migration is transactional and intended to run once. A completely new database needs 001 followed by 002.
+3. Run `supabase/migrations/002_flexible_goals.sql` in the SQL Editor of your existing project. **Do not rerun migration 001.** The new migration is transactional and intended to run once. Then run `supabase/migrations/003_ten_goals.sql` to allow ten active goals per player. A completely new database needs 001, 002, and 003 in order.
 4. Deploy this release to Vercel. Keep the existing public Supabase URL/key and server-only Groq environment variables. No admin key is needed by the deployed application.
 5. Configure custom SMTP, auth URLs, password rules, and email templates below.
 6. Reenable signup. Complete the acceptance checklist before inviting real users.

@@ -4,7 +4,7 @@ A mobile-first goal tracker with flexible targets, XP, and one accountability pa
 
 ## Upgrade an existing deployment
 
-**Apply `supabase/migrations/002_flexible_goals.sql` before deploying this version.** Do not rerun migration 001.
+**Apply any pending migrations in order: `002_flexible_goals.sql`, then `003_ten_goals.sql`, before deploying this version.** Do not rerun migration 001.
 
 Read the [upgrade guide](docs/UPGRADE.md) for the optional account/data reset, migration order, Supabase SMTP and email templates, callback URLs, reward rules, and manual acceptance checklist. The migration and reset have not been run automatically.
 
@@ -19,13 +19,13 @@ npm run dev
 
 Open `http://localhost:3000`. The server binds to `0.0.0.0` for phone access on the same network. Add the computer's LAN origin and `/auth/confirm` and `/auth/recovery` paths to Supabase's redirect allowlist when testing on a phone.
 
-Use `.env.local` for the variables listed in `.env.example`. Existing local credentials remain there; never commit that file. A fresh database needs migration 001 followed by 002. Enable email/password signup with confirmation and set up custom SMTP as described in the upgrade guide.
+Use `.env.local` for the variables listed in `.env.example`. Existing local credentials remain there; never commit that file. A fresh database needs migrations 001, 002, and 003 in order. Enable email/password signup with confirmation and set up custom SMTP as described in the upgrade guide.
 
 ## Included
 
 - Verified email/password signup, password login without email, and password recovery.
 - One-time player name/insignia setup and six selectable geometric marks.
-- Up to three active goals; distinct-day or quantity targets per calendar week/month.
+- Up to ten active goals; distinct-day or quantity targets per calendar week/month.
 - Full/smaller/skipped day check-ins and editable daily quantity totals.
 - Server-calculated daily XP, weekly/monthly bonuses, streaks, grace periods, and target history.
 - Archiving/restoring with separate goal runs; preserved earned history.
